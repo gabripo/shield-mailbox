@@ -122,6 +122,7 @@ class Mail:
     message_id: str
     received: str
     sender: str      # the original sender, also for mail forwarded by a filter
+    sender_name: str # the sender's display name ('' if none)
     to: str          # the address it was sent to, e.g. a plus-address like mybots+casa@gmail.com
     subject: str
     text: str        # the text/plain part ('' if the mail has only HTML)
@@ -138,7 +139,8 @@ class Mail:
         return links_in(self.html, self.text)
 
     def as_dict(self):
-        return {"id": self.message_id, "uid": self.uid, "received": self.received, "sender": self.sender, "to": self.to,
+        return {"id": self.message_id, "uid": self.uid, "received": self.received, "sender": self.sender,
+                "sender_name": self.sender_name, "to": self.to,
                 "subject": self.subject, "text": self.text, "html": self.html, "folder": self.folder}
 
 
@@ -187,6 +189,7 @@ class Mailbox:
             message_id=(msg.get("Message-ID") or "").strip() or f"{self.user}:{self.folder}:{uid}",
             received=msg.get("Date", ""),
             sender=original_sender(msg, text or html_to_text(html)[:3000]),
+            sender_name=decode_header(email.utils.parseaddr(msg.get("From", ""))[0]).strip(),
             to=email.utils.parseaddr(msg.get("Delivered-To") or msg.get("To", ""))[1],
             subject=decode_header(msg.get("Subject")),
             text=text, html=html, folder=self.folder,

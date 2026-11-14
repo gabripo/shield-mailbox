@@ -48,7 +48,7 @@ for mail in box.iter_new(limit=50):           # unread mail in the label, oldest
 | `.fetch_new(limit=50, mark_seen=True)` | The same as a list (marked read as soon as fetched) |
 | `.peek(limit=10)` | The last mails with an unread flag, changing nothing |
 | `.folders()` | The folder (label) names |
-| `Mail` | `uid, message_id, received, sender, to, subject, text, html, folder`, plus `.body`, `.links`, `.as_dict()` |
+| `Mail` | `uid, message_id, received, sender, sender_name, to, subject, text, html, folder`, plus `.body`, `.links`, `.as_dict()` |
 | `html_to_text(html)`, `links_in(html, text)` | The helpers behind `.body` and `.links` |
 | `MailboxError` | Login or folder problems, with a message that says what to check |
 

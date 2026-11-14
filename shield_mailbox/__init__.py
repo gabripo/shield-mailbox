@@ -7,4 +7,4 @@
 from .mailbox import Mail, Mailbox, MailboxError, html_to_text, links_in, original_sender
 
 __all__ = ["Mail", "Mailbox", "MailboxError", "html_to_text", "links_in", "original_sender"]
-__version__ = "0.1.0"
+__version__ = "0.1.1"

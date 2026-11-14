@@ -108,6 +108,7 @@ class MailboxTest(unittest.TestCase):
         mail, forwarded = Mailbox("h", "u", "app-password", folder="Casa").fetch_new()
         self.assertEqual(mail.to, "mybots+casa@gmail.com")
         self.assertEqual(mail.sender, "noreply@immobiliare.it")
+        self.assertEqual(mail.sender_name, "Immobiliare.it")
         self.assertIn("https://www.immobiliare.it/annunci/134530643/?utm_source=alert&x=1", [u for u, _ in mail.links])
         self.assertIn("https://www.idealista.it/immobile/12345678/", [u for u, _ in mail.links])
         self.assertIn("Trilocale via della Repubblica 93", dict(mail.links).values())
